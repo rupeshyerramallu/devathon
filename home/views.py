@@ -18,7 +18,7 @@ def inout(request):
             a.exit=datetime.now()
             a.flag=1
             a.save()
-            return render (request,'home/guards-base.html',{'success':'Succesful'})
+            return render (request,'home/guard-base.html',{'success':'Succesful'})
         else:
             return HttpResponse("<h1>Not 1 direction</h1>")
     else:
@@ -70,3 +70,8 @@ def adview(request):
         'vehicles': vehicles, 'number': Guest.objects.filter(flag=1).count()})
     else:
         return HttpResponse("<h1>abcd</h1>")
+
+
+def log_out(request):
+    logout(request)
+    return render(request, 'home/login.html', )

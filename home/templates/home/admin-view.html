@@ -1,0 +1,35 @@
+{% extends 'home/base.html' %}
+{% block title %}Home{% endblock %}
+{ % block home_active % }  active  { % endblock % }
+{% block body %}
+<div class="jumbotron">
+    <h1 align="center">Home Page</h1>
+    <p align="center"> Security-Officer panel</p>
+  </div>
+<div class="jumbotron">
+    Enter the Vehicle to be Registered:<br>
+
+</div>
+{%if vehicles%}
+    {%if number%}
+    You Have {{number}} vehicles..
+    {%endif%}
+    <table class="table table-stripped table-bordered">
+        <thead>
+        <tr>
+            <td>S.no</td>
+            <td>vehicle-id</td>
+
+        </tr>
+        </thead>
+        {%for vehicle in vehicles%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{vehicle.num}}</td>
+            </tr>
+        {%endfor%}
+    </table>
+{%else%}
+    <p >You have no vehicles</p>
+{%endif%}
+{%endblock%}

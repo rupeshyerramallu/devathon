@@ -7,6 +7,12 @@
     <p align="center"> Security-Officer panel</p>
   </div>
 <div class="jumbotron">
+    {%if success%}
+    <div class="alert  alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{success}}</strong>
+    </div>
+{%endif%}
     Enter the Vehicle to be Registered:<br>
     <form method="post" action="{% url 'home:register' %}">
             {% csrf_token %}
@@ -17,4 +23,50 @@
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
 </div>
+{%if r_vehicles%}
+    {%if r_number%}
+   <h3> There are {{r_number}} Registered vehicles in campus</h3>
+    {%endif%}
+    <table class="table table-stripped table-bordered">
+        <thead>
+        <tr>
+            <td>S.no</td>
+            <td>vehicle-id</td>
+        </tr>
+        </thead>
+        {%for r_vehicle in r_vehicles%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{r_vehicle.num}}</td>
+            </tr>
+        {%endfor%}
+    </table>
+{%else%}
+    <p >You have no Registered vehicles</p>
+{%endif%}
+
+{%if g_vehicles%}
+    {%if g_number%}
+    <h3>There are {{g_number}} Guest vehicles inside campus</h3>
+    {%endif%}
+    <table class="table table-stripped table-bordered">
+        <thead>
+        <tr>
+            <td>S.no</td>
+            <td>vehicle-id</td>
+            <td>Entry-Time</td>
+
+        </tr>
+        </thead>
+        {%for g_vehicle in g_vehicles%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{g_vehicle.num}}</td>
+                <td>{{g_vehicle.entry}}</td>
+            </tr>
+        {%endfor%}
+    </table>
+{%else%}
+    <p >You have no Guest vehicles inside</p>
+{%endif%}
 {%endblock%}
